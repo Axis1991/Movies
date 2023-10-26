@@ -1,4 +1,5 @@
 using BlazorApp1.Client;
+using BlazorApp1.Client.Helpers;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Runtime.CompilerServices;
@@ -17,4 +18,5 @@ await builder.Build().RunAsync();
 {
     services.AddSingleton<SingletonService>();
     services.AddTransient<TransientService>();
+    services.AddTransient<Irepository, RepositoryInMemory>();
 }
