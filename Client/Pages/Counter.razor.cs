@@ -28,8 +28,8 @@ namespace BlazorApp1.Client.Pages
         public async Task IncrementCount()
         {
             currentCount++;
-            singleton.Value += currentCount;
-            transient.Value += currentCount;
+            singleton.Value += 1;
+            transient.Value += 1;
             currentCountStatic++;
             js.InvokeVoidAsync("dotnetStaticInvocation");
         }
