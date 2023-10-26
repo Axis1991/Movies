@@ -1,4 +1,5 @@
-﻿@if (Movies == null)
+﻿@inject IJSRuntime js
+@if (Movies == null)
 {
   <img src="https://i.gifer.com/ZZ5H.gif" />
 }
@@ -20,9 +21,14 @@ else
     [Parameter] public List<Movie> Movies { get; set; }
     bool displayButtons = true;
 
-    private void DeleteMovie(Movie movie)
+    private async Task DeleteMovie(Movie movie)
     {
-        Movies.Remove(movie);
+        await js.MyFunction("custom message");
+        var confirmed = await js.Confirm($"Are you sure you want to delete {movie.Title}?");
+        if (confirmed)
+        {
+            Movies.Remove(movie);
+        }
     }
     protected override void OnInitialized()
     {
