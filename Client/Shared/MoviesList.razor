@@ -1,14 +1,23 @@
-﻿<input type="checkbox" @bind="displayButtons" />
-
-<GenericList List="Movies">
-    <ElementTemplate Context="movie">
+﻿@if (Movies == null)
+{
+  <img src="https://i.gifer.com/ZZ5H.gif" />
+}
+else if (Movies.Count == 0)
+{   
+    <text>"There are no records to show"</text>
+}
+else
+{
+    <input type="checkbox" @bind="displayButtons" />
+    @foreach (var movie in Movies)
+    {
         <IndividualMovie Movie="movie" DisplayButtons="displayButtons" DeleteMovie="DeleteMovie" />
-    </ElementTemplate>
-</GenericList>
+    }
+}
+
 
 @code {
     [Parameter] public List<Movie> Movies { get; set; }
-
     bool displayButtons = true;
 
         private void DeleteMovie(Movie movie)

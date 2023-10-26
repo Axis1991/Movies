@@ -8,25 +8,24 @@
 
 @code {
     private List<Movie> movies;
-    // private Dictionary<string, object> dummyTextboxParameters = new Dictionary<string, object>() {
-    //                                                                  { "placeholder", "new movie name 2"},
-    //                                                                   { "disabled", "true"}
-    //                                                                  };
+    private Dictionary<string, object> dummyTextboxParameters = new Dictionary<string, object>() {
+                                                                     { "placeholder", "new movie name 2"},
+                                                                      { "disabled", "true"}
+                                                                     };
 
     protected async override Task OnInitializedAsync()
     {
         await Task.Delay(2000);
-        movies = new List<Movie>();
-        movies.Add(new Movie() { Title = "Sexy and I know it", ReleaseDate = new DateTime(2023, 10, 12) });
-        // {
-        //    new Movie(){Title = "spiderman: far from home", ReleaseDate = new DateTime(2019, 7, 2)},
-        //    new Movie(){Title = "moana", ReleaseDate = new DateTime(2016, 11, 23)},
-        //    new Movie(){Title = "inception", ReleaseDate = new DateTime(2010, 7, 16)}
-        // };
+        movies = new List<Movie>()
+        {
+            new Movie() { Title = "spiderman: far from home", ReleaseDate = new DateTime(2019, 7, 2) },
+            new Movie() { Title = "moana", ReleaseDate = new DateTime(2016, 11, 23) },
+            new Movie() {Title = "inception", ReleaseDate = new DateTime(2010, 7, 16)}
+        };
     }
 }
 
-
+       @* movies.Add(new Movie() { Title = "Sexy and I know it", ReleaseDate = new DateTime(2023, 10, 12) }); *@
 
 
 @* <button @onclick="@(( )=> Console.WriteLine("I've been clicked'"))"> Click me </button> *@
