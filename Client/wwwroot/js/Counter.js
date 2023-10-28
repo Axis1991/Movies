@@ -1,3 +1,3 @@
-﻿function displayAlert(message) {
+﻿export function displayAlert(message) {
     return alert(message);
 }
