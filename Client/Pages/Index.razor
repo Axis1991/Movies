@@ -1,16 +1,18 @@
 ﻿@page "/"
 @inject SingletonService singleton
 @inject Irepository repository
+@using static BlazorApp1.Client.Shared.MainLayout;
 
 <div>
     <h1> Movie</h1>
     <MoviesList Movies="movies" />
 </div>
 
-<p>Singleton count: @singleton.Value</p>
+<p style="color: @AppState.Color">Singleton count: @singleton.Value</p>
 
 <button @onclick="AddNewMovie"> Add new movie </button>
 @code {
+    [CascadingParameter] public AppState AppState { get; set; }
     private List<Movie> movies;
     private Dictionary<string, object> dummyTextboxParameters = new Dictionary<string, object>() {
                                                                      { "placeholder", "new movie name 2"},
