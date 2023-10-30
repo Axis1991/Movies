@@ -15,6 +15,6 @@
     private string movieURL = string.Empty;
     protected override void OnInitialized()
     {
-        movieURL = $"movie/";
+        movieURL = $"movie/{Movie.Id}/{Movie.Title.Replace(" ", "-")}";
     }
 }
