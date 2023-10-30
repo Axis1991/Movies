@@ -10,21 +10,8 @@
             <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
         </div>
 
-        <article class="content px-4">
-            <CascadingValue Value="@appState">
+        <article class="content px-4">        
                   @Body
-             </CascadingValue>
-            @* <p style="color: green">More code from interface</p> *@
         </article>
     </div>
 </div>
-
-@code {
-    AppState appState = new AppState();
-    public class AppState
-    {
-        public string Color { get; set; } = "green";
-        public string Size { get; set; } = "12px";
-    }
-    
-}

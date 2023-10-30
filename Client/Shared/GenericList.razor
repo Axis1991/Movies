@@ -1,0 +1,22 @@
+﻿@typeparam TItem
+
+@if (List == null)
+{
+    <img src="https://i.gifer.com/ZZ5H.gif" />
+}
+else if (List.Count == 0)
+{
+    <text>"There are no records to show"</text>
+}
+else
+{
+    @foreach (var element in List)
+    {
+        @ElementTemplate(element)
+    }
+}
+
+@code {
+    [Parameter] public List<TItem> List { get; set; }
+    [Parameter] public RenderFragment<TItem> ElementTemplate { get; set; }
+}

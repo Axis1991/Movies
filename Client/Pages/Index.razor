@@ -1,36 +1,19 @@
 ﻿@page "/"
-@inject SingletonService singleton
+@page "/index"
 @inject Irepository repository
-@using static BlazorApp1.Client.Shared.MainLayout;
 
 <div>
     <h1> Movie</h1>
     <MoviesList Movies="movies" />
 </div>
 
-<p style="color: @AppState.Color">Singleton count: @singleton.Value</p>
 
-<button @onclick="AddNewMovie"> Add new movie </button>
 @code {
-    [CascadingParameter] public AppState AppState { get; set; }
     private List<Movie> movies;
-    private Dictionary<string, object> dummyTextboxParameters = new Dictionary<string, object>() {
-                                                                     { "placeholder", "new movie name 2"},
-                                                                      { "disabled", "true"}
-                                                                     };
 
     protected override void OnInitialized()
     {
         movies = repository.GetMovies();
     }
-    private void AddNewMovie()
-    {
-        movies.Add(new Movie() { Title = "Movie Sample", ReleaseDate = DateTime.Today });
-    }
+
 }
-
-
-
-@*  protected async override Task OnInitializedAsync()
-    {
-        await Task.Delay(2000); *@

@@ -22,6 +22,7 @@ namespace BlazorApp1.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
