@@ -16,7 +16,5 @@ await builder.Build().RunAsync();
 
  static void ConfigureServices(IServiceCollection services)
 {
-    services.AddSingleton<SingletonService>();
-    services.AddTransient<TransientService>();
     services.AddTransient<Irepository, RepositoryInMemory>();
 }
