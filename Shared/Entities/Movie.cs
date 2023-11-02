@@ -18,6 +18,7 @@ namespace Movies.Shared.Entities
         [Required]
         public DateTime? ReleaseDate { get; set; }
         public string Poster {  get; set; }
+        public List<MoviesGenres> MoviesGenres { get; set; } = new List<MoviesGenres>();
         public string TitleBrief
         {
             get
