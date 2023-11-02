@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace Movies.Shared.Entities
 {
@@ -12,8 +13,7 @@ namespace Movies.Shared.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Biography { get; set; }
-        public int Picture { get; set; }
-        [Required]
+        public string Picture { get; set; }
         public DateTime? DateOfBirth { get; set; }
     }
 }

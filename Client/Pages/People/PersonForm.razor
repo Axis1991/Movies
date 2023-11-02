@@ -17,11 +17,13 @@
     </div>
 
         <div class="form-group">
-          
+           <InputImg Label="Picture" OnSelectedImage="OnSelectedImage" ImageURL="@ImageURL" />
         </div>
 
-        <div class="form-group">
-
+        <div class="form-group form-markdown">
+            <InputMarkdown @bind-Value="Person.Biography"
+                                            Label ="Biography"
+                                            For ="@( ()=> Person.Biography)" />
         </div>
 
         <button type="submit" class="btn btn-primary"> Submit</button>
@@ -31,5 +33,20 @@
 @code {
     [Parameter] public Person Person { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+    string ImageURL;
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(Person.Picture))
+        {
+            ImageURL = Person.Picture;
+            Person.Picture = null;
+        }
+    }
+    private void OnSelectedImage(string imageBase64)
+    {
+        Person.Picture = imageBase64;
+        ImageURL = null;
+    }
 
 }
