@@ -25,7 +25,8 @@
         <div class="blazored-typeahead_results">
             @foreach (var item in Suggestions)
             {
-                <div @key="item" class="blazored-typeahead_result" tabindex="0" @onclick="@(()=> SelectSuggestions(item))">
+                <div @key="item" class="blazored-typeahead_result" tabindex="0" @onclick="@(()=> SelectSuggestions(item))"
+                @onmouseover="OnmouseoverSuggestion" @onmouseout="OnmouseoutSuggestion">
                     @ResultTemplate(item)
 
                 </div>
@@ -40,7 +41,6 @@
                 <div class="blazored-typeahead_notfound">
                     @NotFoundTemplate
                 </div>
-            }
             }
             else
             {
@@ -76,7 +76,7 @@
         base.OnInitialized();
     }
 
-    protected async void Search(Object source, ElapsedEventHandler e)
+    protected async void Search(Object source, ElapsedEventArgs e)
     {
         IsSearching = true;
         IsShowingSuggestions = false;
@@ -126,7 +126,11 @@
 
     private void onfocusout()
     {
-        IsShowingSuggestions = false;
+        if (!isMouseInSuggestion)
+        {
+            IsShowingSuggestions = false;
+        }
+       
     }
 
     private async Task SelectSuggestions(TItem item)
@@ -138,5 +142,15 @@
     private bool ShowNotFound()
     {
         return !Suggestions.Any() && IsShowingSuggestions;
+    }
+
+    bool isMouseInSuggestion = false;
+    private void OnmouseoverSuggestion()
+    {
+        bool isMouseInSuggestion = true;
+    }
+    private void OnmouseoutSuggestion()
+    {
+        bool isMouseInSuggestion = false;
     }
 }
