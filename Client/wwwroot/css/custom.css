@@ -170,3 +170,14 @@
     -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
     animation: sk-scaleout 1.0s infinite ease-in-out;
 }
+
+.badge {
+    position: sticky;
+    top: 0;
+    right: 0;
+    background-color: #007bff;
+    / color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
