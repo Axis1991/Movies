@@ -17,4 +17,5 @@ await builder.Build().RunAsync();
  static void ConfigureServices(IServiceCollection services)
 {
     services.AddTransient<Irepository, RepositoryInMemory>();
+    services.AddAuthorizationCore();
 }

@@ -11,7 +11,7 @@ namespace Movies.Shared.Entities
     {
         public int Id { get; set; }
         [Required(ErrorMessage="Please type the movie genre")]
-        public string Name { get; set; }
-        public List<MoviesGenres> MoviesGenres { get; set; } = new List<MoviesGenres>();
+        public string? Name { get; set; }
+        //public List<MoviesGenres> MoviesGenres { get; set; } = new List<MoviesGenres>();
     }
 }

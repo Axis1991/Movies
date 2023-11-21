@@ -1,7 +1,7 @@
-using BlazorApp1.Shared;
+using Movies.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlazorApp1.Server.Controllers
+namespace Movies.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

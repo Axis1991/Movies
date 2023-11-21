@@ -20,7 +20,7 @@
     {
         if (args.Path.EndsWith("counter"))
         {
-            var assemblies = await lazyLoader.LoadAssembliesAsync(new List<string> { "MathNet.Numerics.dll" });
+            var assemblies = await lazyLoader.LoadAssembliesAsync(new List<string> { "MathNet.Numerics.wasm" });
             lazyLoadedAssemblies.AddRange(assemblies);
         }
         }
