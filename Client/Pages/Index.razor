@@ -2,6 +2,14 @@
 @page "/index"
 @inject Irepository repository
 
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        You are authorized, @context.User.Identity.Name
+    </Authorized>
+    <NotAuthorized>
+        Not authorized
+    </NotAuthorized>
+</AuthorizeView>
 <div>
     <h1> Movie</h1>
     <MoviesList Movies="movies" />

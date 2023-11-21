@@ -3,11 +3,16 @@
         <img src="@Movie.Poster" alt="Poster" class="movie-poster" />
     </a>
     <p><a href="@movieURL">@Movie.TitleBrief</a></p>
+
+    <AuthorizeView Roles="Admin">
+        <Authorized>
+      
     <div>
         <a class="btn btn-info">Edit</a>
         <button type="button" class="btn btn-danger" @onclick="@( ()=>DeleteMovie.InvokeAsync(Movie))">Delete</button>
-
     </div>
+        </Authorized>
+    </AuthorizeView>
 </div>
 @code {
     [Parameter] public Movie Movie { get; set; }
