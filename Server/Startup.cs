@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq;
+using System.Text;
 
 namespace Movies.Server
 {
@@ -34,18 +36,16 @@ namespace Movies.Server
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders();
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false,
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(
-            //        Encoding.UTF8.GetBytes(Configuration["jwt:key"])),
-            //        ClockSkew = TimeSpan.Zero
-            //    });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(Configuration["jwt:key"])),
+                    ClockSkew = TimeSpan.Zero
+                });
 
         }
 
@@ -64,11 +64,14 @@ namespace Movies.Server
                 app.UseHsts();
             }
 
+           
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
