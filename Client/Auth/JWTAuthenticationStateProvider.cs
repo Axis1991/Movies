@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace BlazorApp1.Client.Auth
 {
-    public class JWTAuthenticationStateProvider : AuthenticationStateProvider
+    public class JWTAuthenticationStateProvider : AuthenticationStateProvider, ILoginService
     {
         private readonly IJSRuntime js;
         private readonly HttpClient httpClient;
@@ -20,7 +20,7 @@ namespace BlazorApp1.Client.Auth
            this.js = js;
          }
 
-    public async override Task<AuthenticationState> GetAuthenticationStateAsync()
+        public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var token = await js.GetFromLocalStorage(TOKENKEY);
 
@@ -77,6 +77,25 @@ namespace BlazorApp1.Client.Auth
                 case 3: base64 += "="; break;
             }
             return Convert.FromBase64String(base64);
+        }
+
+        public async Task Login(string token)
+        {
+         await js.SetInLocalStorage(TOKENKEY, token);
+         var authState = BuildAuthenticationState(token);
+         NotifyAuthenticationStateChanged(Task.FromResult(authState));
+        }
+
+        public async Task Logout()
+        {
+            await js.RemoveItem(TOKENKEY);
+            httpClient.DefaultRequestHeaders.Authorization = null;
+            NotifyAuthenticationStateChanged(Task.FromResult(Annonymous));
+        }
+
+        public Task Login()
+        {
+            throw new NotImplementedException();
         }
     }
 }

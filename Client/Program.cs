@@ -20,6 +20,13 @@ await builder.Build().RunAsync();
 {
     services.AddTransient<Irepository, RepositoryInMemory>();
     services.AddAuthorizationCore();
-    services.AddScoped<AuthenticationStateProvider, DummyAuthStateProvider>();
+    services.AddScoped<JWTAuthenticationStateProvider>();
+    services.AddScoped<AuthenticationStateProvider, JWTAuthenticationStateProvider>
+        (
+        provider => provider.GetRequiredService<JWTAuthenticationStateProvider>()
+        );
+
+    services.AddScoped<ILoginService, JWTAuthenticationStateProvider>(
+        provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
 }
